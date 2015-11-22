@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
     <head>
         <title>
@@ -28,6 +29,7 @@
             #countbox {
                 opacity: 0.6;
                 background-color: black;
+                padding: 3px 3px 3px 3px;
             }
         </style>
     </head>
@@ -36,7 +38,11 @@
             <center>
                 <input id="button" type="image" src="./button.png" onclick="playTatoe();" />
                 <div id="countbox">
-                    nexerq.cf/t<span id="counter"></span>
+                    <span style="opacity: 1.0;">
+                        nexerq.cf/t<span id="counter"></span>
+                        <br>
+                        <input type="image" id="tweetButton" onclick="onTweetButton();" src="https://g.twimg.com/about/feature-corporate/image/tweetbutton.png" width="61" height="22" />
+                    </span>
                 </div>
             </center>
         </div>
@@ -61,6 +67,10 @@
                 delete tatoe;
                 counter++;
                 counterElem.innerHTML = "atoe: " + counter;
+            };
+
+            function onTweetButton() {
+                window.open("https://twitter.com/intent/tweet?hashtags=tatoe&text=TATOE...%20I%20clicked%20a%20useless%20button%20" + counter + "%20times!&tw_p=tweetbutton&url=http%3A%2F%2Fnexerq.cf%2Ft", "Share with Twitter followers", "width=350,height=250,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=0,top=0");
             };
         </script>
     </body>
