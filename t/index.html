@@ -3,6 +3,7 @@
         <title>
             Hi. - Nexerq
         </title>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,600italic" rel="stylesheet" type="text/css">
         <style type="text/css">
             body {
                 background-image: url(./wp.jpg);
@@ -10,9 +11,12 @@
                 background-repeat: no-repeat;
                 background-attachment: fixed;
                 background-size: cover;
+                font-family: 'Open Sans', sans-serif;
+                font-weight: 300;
+                color: white;
             }
 
-            #button {
+            #centerer {
                 width:200px;
                 height:200px;
                 position:absolute;
@@ -20,13 +24,26 @@
                 top:50%;
                 margin:-200px 0 0 -100px;
             }
+
+            #countbox {
+                opacity: 0.6;
+                background-color: black;
+            }
         </style>
     </head>
     <body>
-        <input id="button" type="image" src="./button.png" onclick="playTatoe();" />
+        <div id="centerer">
+            <center>
+                <input id="button" type="image" src="./button.png" onclick="playTatoe();" />
+                <div id="countbox">
+                    nexerq.cf/t<span id="counter"></span>
+                </div>
+            </center>
+        </div>
 
         <script>
             var tatoedata;
+            var counter = 0;
             var oReq = new XMLHttpRequest();
             oReq.addEventListener("load", function() {
                 tatoedata = this.responseText;
@@ -34,6 +51,7 @@
             oReq.open("GET", "./tatoe.b64");
             oReq.send();
 
+            var counterElem = document.getElementById("counter");
             function playTatoe() {
                 var tatoe = new Audio();
                 var source = document.createElement("source");
@@ -41,6 +59,8 @@
                 tatoe.appendChild(source);
                 tatoe.play();
                 delete tatoe;
+                counter++;
+                counterElem.innerHTML = "atoe: " + counter;
             };
         </script>
     </body>
