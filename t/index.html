@@ -32,6 +32,25 @@
                 padding: 3px 3px 3px 3px;
             }
         </style>
+        <script src="./tatoe.b64.js"></script>
+        <script>
+            var counter = 0;
+            var counterElem = document.getElementById("counter");
+            function playTatoe() {
+                var tatoe = new Audio();
+                var source = document.createElement("source");
+                source.src = tatoedata;
+                tatoe.appendChild(source);
+                tatoe.play();
+                delete tatoe;
+                counter++;
+                counterElem.innerHTML = "atoe: " + counter;
+            };
+
+            function onTweetButton() {
+                window.open("https://twitter.com/intent/tweet?hashtags=tatoe&text=TATOE...%20I%20clicked%20a%20useless%20button%20" + counter + "%20times!&tw_p=tweetbutton&url=http%3A%2F%2Fnexerq.cf%2Ft", "Share with Twitter followers", "width=350,height=250,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=0,top=0");
+            };
+        </script>
     </head>
     <body>
         <div id="centerer">
@@ -46,32 +65,5 @@
                 </div>
             </center>
         </div>
-
-        <script>
-            var tatoedata;
-            var counter = 0;
-            var oReq = new XMLHttpRequest();
-            oReq.addEventListener("load", function() {
-                tatoedata = this.responseText;
-            });
-            oReq.open("GET", "./tatoe.b64");
-            oReq.send();
-
-            var counterElem = document.getElementById("counter");
-            function playTatoe() {
-                var tatoe = new Audio();
-                var source = document.createElement("source");
-                source.src = "data:audio/wav;base64," + tatoedata;
-                tatoe.appendChild(source);
-                tatoe.play();
-                delete tatoe;
-                counter++;
-                counterElem.innerHTML = "atoe: " + counter;
-            };
-
-            function onTweetButton() {
-                window.open("https://twitter.com/intent/tweet?hashtags=tatoe&text=TATOE...%20I%20clicked%20a%20useless%20button%20" + counter + "%20times!&tw_p=tweetbutton&url=http%3A%2F%2Fnexerq.cf%2Ft", "Share with Twitter followers", "width=350,height=250,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=0,top=0");
-            };
-        </script>
     </body>
 </html>
