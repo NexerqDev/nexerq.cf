@@ -1,11 +1,47 @@
 <html>
     <head>
         <title>
-        Hi. - Nexerq
+            Hi. - Nexerq
         </title>
+        <style type="text/css">
+            body {
+                background-image: url(./wp.jpg);
+                background-position: center center;
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: cover;
+            }
+
+            #button {
+                width:200px;
+                height:200px;
+                position:absolute;
+                left:50%;
+                top:50%;
+                margin:-200px 0 0 -100px;
+            }
+        </style>
     </head>
     <body>
-        <audio id="tatoe" src="./tatoe.wav" preload="auto"></audio>
-        <input type="image" src="./button.png" onclick="document.getElementById('tatoe').play();" />
+        <input id="button" type="image" src="./button.png" onclick="playTatoe();" />
+
+        <script>
+            var tatoedata;
+            var oReq = new XMLHttpRequest();
+            oReq.addEventListener("load", function() {
+                tatoedata = this.responseText;
+            });
+            oReq.open("GET", "./tatoe.b64");
+            oReq.send();
+
+            function playTatoe() {
+                var tatoe = new Audio();
+                var source = document.createElement("source");
+                source.src = "data:audio/wav;base64," + tatoedata;
+                tatoe.appendChild(source);
+                tatoe.play();
+                delete tatoe;
+            };
+        </script>
     </body>
 </html>
