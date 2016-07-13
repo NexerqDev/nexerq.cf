@@ -1,0 +1,61 @@
+@import url(https://fonts.googleapis.com/css?family=Exo:300italic);
+
+body {
+  background-image: url(assets/49037131_p0_rs.jpg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: #FFFFFF;
+  width: 98%;
+  height: 100%;
+
+  font-family: 'Exo', sans-serif;
+}
+
+a {
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+.content a {
+  font-size: 0; /* mobile no text */
+}
+
+.content {
+  text-align: center;
+  border-radius: 5px;
+  background: rgba(0, 0, 0, 0.35);
+  width: 98%;
+  padding: 1px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.spacer {
+  margin-left: 15px;
+}
+
+img {
+  max-width: 80%;
+  height: auto;
+  width: auto\9; /* ie8 */
+}
+
+@media (min-width: 850px) {
+  .content {
+    border-radius: 25px;
+    padding-right: 45px;
+    width: auto;
+  }
+
+  .spacer {
+    margin-left: 75px;
+  }
+
+  .content a {
+    font-size: inherit;
+  }
+}

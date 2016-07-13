@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>⚓ TATOE - Nexerq</title>
+        <meta name="description" content="Even if-- TATOE!">
+        <meta property="og:title" content="TATOE"/>
+        <meta property="og:url" content="http://nexerq.cf/t"/>
+        <meta property="og:description" content="Even if-- TATOE!">
+        <meta property="og:image" content="http://nexerq.cf/t/wp.jpg"/>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,600italic" rel="stylesheet" type="text/css">
+        <style type="text/css">
+            body {
+                background-image: url(./wp.jpg);
+                background-position: center center;
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: cover;
+                font-family: 'Open Sans', sans-serif;
+                font-weight: 300;
+                color: white;
+            }
+
+            #centerer {
+                width:200px;
+                height:200px;
+                position:absolute;
+                left:50%;
+                top:50%;
+                margin:-200px 0 0 -100px;
+            }
+
+            #countbox {
+                opacity: 0.6;
+                background-color: black;
+                padding: 3px 3px 3px 3px;
+            }
+        </style>
+        <script src="./tatoe.b64.js"></script>
+    </head>
+    <body>
+        <div id="centerer">
+            <center>
+                <input id="button" type="image" src="./button.png" onclick="playTatoe();" />
+                <div id="countbox">
+                    <span style="opacity: 1.0;">
+                        nexerq.cf/t<span id="counter"></span>
+                        <br>
+                        <input type="image" id="tweetButton" onclick="onTweetButton();" src="https://g.twimg.com/about/feature-corporate/image/tweetbutton.png" width="61" height="22" />
+                    </span>
+                </div>
+            </center>
+        </div>
+
+        <script>
+            var counter = 0;
+            var counterElem = document.getElementById("counter");
+
+            var timeout = null;
+
+            // preload
+            var tatoePreload = new Image();
+            tatoePreload.src = './tatoe.gif'
+
+            function playTatoe() {
+                var tatoe = new Audio();
+                var source = document.createElement("source");
+                source.src = tatoedata;
+                tatoe.appendChild(source);
+                document.body.style['background-image'] = 'url(./tatoe.gif)';
+                tatoe.play();
+                delete tatoe;
+                counter++;
+                counterElem.innerHTML = "atoe: " + counter;
+                if (timeout)
+                    clearTimeout(timeout);
+                timeout = setTimeout(() => {
+                    document.body.style['background-image'] = 'url(./wp.jpg)';
+                }, 762);
+            };
+
+            function onTweetButton() {
+                window.open("https://twitter.com/intent/tweet?hashtags=tatoe&text=TATOE...%20I%20clicked%20a%20useless%20button%20" + counter + "%20times!&tw_p=tweetbutton&url=http%3A%2F%2Fnexerq.cf%2Ft", "Share with Twitter followers", "width=350,height=250,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=0,top=0");
+            };
+        </script>
+    </body>
+</html>
