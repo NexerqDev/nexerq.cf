@@ -43,6 +43,8 @@
 
         <div id="loading">
         LOADING
+
+        <button type="button" onclick="mobileCb()">if on mobile click here</button>
         </div>
 
         <script>
@@ -102,8 +104,35 @@
                 noticeElem.style.color = "red";
             }
 
+            // fk mobile
+            var mobileLoaded = false;
+            try {
+                // its a promise?! idk man
+                let p = loopAudio.audios["bgloop"]._1.play();
+                if (p !== undefined) {
+                    p.then(function() {
+                        loopAudio.audios["bgloop"]._1.pause();
+                        mobileLoaded = true;
+                    })
+                    .catch(function(err) { /* its still false */ });
+                } else {
+                    mobileLoaded = true;
+                    loopAudio.audios["bgloop"]._1.pause();
+                }
+            }
+            catch (e) { }
+
+            function mobileCb() {
+                loopAudio.audios["bgloop"]._1.play();
+                loopAudio.audios["bgloop"]._1.pause();
+                loopAudio.audios["bgloop"]._2.play();
+                loopAudio.audios["bgloop"]._2.pause();
+
+                mobileLoaded = true;
+            }
+
             var i = setInterval(function() {
-                if (vroomLoaded && loopLoaded) {
+                if (vroomLoaded && loopLoaded && mobileLoaded) {
                     clearInterval(i);
                     document.getElementById("main").style.display = "";
                     document.getElementById("loading").style.display = "none";
