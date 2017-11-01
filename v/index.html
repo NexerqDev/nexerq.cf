@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>ae86</title>
+        <!-- <meta name="description" content="Even if-- TATOE!">
+        <meta property="og:title" content="TATOE"/>
+        <meta property="og:url" content="http://nexerq.cf/t"/>
+        <meta property="og:description" content="Even if-- TATOE!">
+        <meta property="og:image" content="http://nexerq.cf/t/wp.jpg"/> -->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,600italic" rel="stylesheet" type="text/css">
+        <style type="text/css">
+            body {
+                /*background-image: url(./wp.jpg);
+                background-position: center center;
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: cover;*/
+                font-family: 'Open Sans', sans-serif;
+                font-weight: 300;
+                color: black;
+            }
+
+            img.zoom {
+                -webkit-transform: scale(6);
+                -moz-transform: scale(6);
+                -ms-transform: scale(6);
+                -o-transform: scale(6);
+                transform: scale(6);
+            }
+            img.redify {
+                filter: hue-rotate(90deg) saturate(30) brightness(1.4);
+            }
+        </style>
+        <script type="text/javascript" src="./SeamlessLoop.js"></script> 
+    </head>
+    <body>
+        <div id="main" style="display: none;">
+            <div id="notice">click to vroom</div>
+            <img src="./vroom.jpg" alt="VROOM" id="vroomImg" onclick="vroom()">
+        </div>
+
+        <div id="loading">
+        LOADING
+        </div>
+
+        <script>
+            var displayImg = document.getElementById("vroomImg");
+            var noticeElem = document.getElementById("notice");
+
+            //var loopAudio = new Audio("./90loop.mp3");
+            // cross browser compat looping - shitty looping tho. lets try lib loop
+            // if (typeof loopAudio.loop === "boolean") {
+            //     loopAudio.loop = true;
+            // } else {
+            //     loopAudio.addEventListener("ended", function() {
+            //         this.currentTime = 0;
+            //         this.play();
+            //     }, false);
+            // }
+
+            var loopAudio = new SeamlessLoop();
+            var loopLoaded = false;
+            loopAudio.addUri("./90loop.mp3", 3056, "bgloop");
+            loopAudio.callback(function() {
+                loopLoaded = true;
+                //loopAudio.start("bgloop");
+            });
+
+            var vroomAudio = new Audio("./vroom.mp3");
+            var vroomLoaded = false;
+            vroomAudio.addEventListener("canplaythrough", function() {
+                vroomLoaded = true;
+            }, false);
+
+            var vrooming = false;
+            vroomAudio.addEventListener("ended", function() {
+                vrooming = false;
+                this.currentTime = 0;
+
+                //loopAudio.play();
+                loopAudio.start("bgloop");
+                displayImg.className = "";
+
+                noticeElem.innerHTML = "click the car";
+                noticeElem.style.color = "";
+            }, false);
+
+            function vroom() {
+                if (!(vroomLoaded && loopLoaded) || vrooming)
+                    return;
+
+                loopAudio.stop();
+                //loopAudio.pause();
+                //loopAudio.currentTime = 0; // reset it for next
+
+                vroomAudio.play();
+                displayImg.className = "zoom redify";
+
+                noticeElem.innerHTML = "ZOOM";
+                noticeElem.style.color = "red";
+            }
+
+            var i = setInterval(function() {
+                if (vroomLoaded && loopLoaded) {
+                    clearInterval(i);
+                    document.getElementById("main").style.display = "";
+                    document.getElementById("loading").style.display = "none";
+
+                    loopAudio.start("bgloop");
+                }
+            }, 250);
+        </script>
+    </body>
+</html>
