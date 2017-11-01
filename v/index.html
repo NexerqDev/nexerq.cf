@@ -108,7 +108,7 @@
             var mobileLoaded = false;
             try {
                 // its a promise?! idk man
-                let p = loopAudio.audios["bgloop"]._1.play();
+                var p = loopAudio.audios["bgloop"]._1.play();
                 if (p !== undefined) {
                     p.then(function() {
                         loopAudio.audios["bgloop"]._1.pause();
