@@ -1,0 +1,44 @@
+<html>
+<head>
+	<title>pingtest</title>
+
+	<script src="https://cdn.jsdelivr.net/npm/web-pingjs@1.0.1/ping.min.js"></script>
+</head>
+<body>
+	ping test - maple
+	<br>
+	<br>
+	<span id="disp">... ms</span>
+
+<!-- 	<br>
+	<br>
+	History<br>
+	<span id="hist"></span> -->
+
+	<script>
+		var hist = [];
+
+		function f() {
+			ping("http://175.207.1.121:8585", 0.6)
+				.then(function(delta) {
+					hist.unshift([new Date(), String(delta) + " ms"]);
+				})
+				.catch(function(err) {
+					hist.unshift([new Date(), "err - " + err]);
+				})
+				.finally(function() {
+					document.getElementById("disp").innerText = hist[0][1];
+
+					// document.getElementById("hist").innerHtml = "";
+					// for (var h of hist) {
+					// 	document.getElementById("hist").innerHtml += "[" + h[0].toString() + "]: " + h[1] + "<br>";
+					// }
+
+					setTimeout(f, 2500);
+				})
+		}
+
+		f();
+	</script>
+</body>
+</html>
